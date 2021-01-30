@@ -11,7 +11,7 @@
 O projeto consiste em um sistema web que tem como objetivo organizar as atividades do usuário em forma de checklist de cards. Através dessa plataforma é possível realizar o CRUD das tarefas, ou seja, o usuário poderá cadastrar uma nova atividade, como também obter as informações detalhadas dela, assim como deletar, caso seja necessário. 
 
 ## :rocket: Tecnologias Utilizadas
-Esse projeto  com as seguintes tecnologias:
+Esse projeto contém as seguintes tecnologias:
 
 - Node.js
 - Vue.js
