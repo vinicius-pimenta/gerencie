@@ -8,7 +8,7 @@
 
 
 ## :large_blue_circle: Sobre
-O projeto consiste em um sistema web que tem como objetivo organizar as atividades do usuário em forma de checklist de cards. Através dessa plataforma é possível realizar o CRUD das tarefas, ou seja, o usuário poderá cadastrar uma nova atividade, como também obter as informações detalhadas dela, assim como deletar, caso seja necessário. 
+O projeto consiste em um sistema web que tem como objetivo designar tarefas em forma de checklist de cards, assim como acompanhá-las. Através dessa plataforma é possível realizar o CRUD das tarefas, e o usuário poderá apenas listar e marcar as tarefas de domínio como concluída. 
 
 ## :rocket: Tecnologias Utilizadas
 Esse projeto contém as seguintes tecnologias:
