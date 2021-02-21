@@ -1,0 +1,146 @@
+body{
+	background-color: #f0f0f0;
+	font-family: sans-serif;
+}
+
+.form{
+	width: 1400px;
+	margin: auto;
+	padding-top: 40px;
+}
+
+.card{
+	box-shadow: 1px 1px 5px #ccc;
+	background-color: #8585ad;
+	position: fixed;
+	top: 50px;
+	left: 21px;
+	padding: 30px;
+	border-radius: 5px;
+	display: inline-block;
+	float: left;
+	height: 600px;
+}
+
+.card-top{
+	text-align: center;
+}
+
+.card-group{
+	margin-bottom: 10px;
+}
+
+.card-group > label{
+	width: 100%;
+	color: #e0e0eb;
+	display: block;
+	text-align: center;
+}
+
+.card-group > button{
+	background-color: #d1d1e0;
+	width: 100%;
+	border-radius: 5px;
+	padding: 10px;
+	color: black;
+	border: 20px;
+	outline: 40;
+}
+
+.create{
+	box-shadow: 1px 1px 5px #ccc;
+	background-color: #52527a;
+	position: fixed;
+	width: 1000px;
+	height: 300px;
+	top: 50px;
+	left: 285px;
+	padding: 25px;
+	border-radius: 5px;
+	display: inline-block;
+	float: right;
+}
+
+.create-top{
+	text-align: center;
+}
+
+.create-group{
+	margin-bottom: 10px;
+}
+
+.create-group > input{
+	background-color: #d1d1e0;
+	width: 98%;
+	border-radius: 5px;
+	padding: 10px;
+	color: black;
+	border: 20px;
+	outline: 40;
+}
+
+.create2-group > button{
+	background-color: #cc7a00;
+	position: fixed;
+	width: 140px;
+	top: 328px;
+	left: 1000px;
+	border-radius: 5px;
+	display: block;
+	padding: 10px;
+	color: black;
+	border: 20px;
+	outline: 40;
+}
+
+.create3-top{
+	text-align: center;
+}
+
+.create3-group > button{
+	background-color: #cc7a00;
+	position: fixed;
+	width: 140px;
+	top: 328px;
+	left: 1165px;
+	border-radius: 5px;
+	display: block;
+	padding: 10px;
+	color: black;
+	border: 20px;
+	outline: 40;
+}
+
+.create4-group > button{
+	background-color: #cc7a00;
+	position: fixed;
+	width: 140px;
+	top: 650px;
+	left: 60px;
+	text-align: center;
+	border-radius: 5px;
+	display: block;
+	padding: 10px;
+	color: black;
+	border: 20px;
+	outline: 40;
+}
+
+.create5-group > button{
+	background-color: #ffd699;
+	position: fixed;
+	width: 140px;
+	top: 600px;
+	left: 60px;
+	text-align: center;
+	border-radius: 5px;
+	display: block;
+	padding: 10px;
+	color: black;
+	border: 20px;
+	outline: 40;
+}
+
+.title{
+	color: #dc3545;
+}
