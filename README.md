@@ -13,8 +13,9 @@ O projeto consiste em um sistema web que tem como objetivo designar tarefas em f
 ## :rocket: Tecnologias Utilizadas
 Esse projeto contém as seguintes tecnologias:
 
+- TypeScript
 - Node.js
-- Vue.js
+- ReactJS
 - PostgreSQL
 
 ## :bust_in_silhouette: Colaboradores
