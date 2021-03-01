@@ -14,10 +14,5 @@ export default {
     Sessions: {
       'create:any': ['*'],
     },
-    Users: {
-      'create:any': ['*'],
-      'update:any': ['*'],
-      'delete:any': ['*'],
-    },
   },
 };

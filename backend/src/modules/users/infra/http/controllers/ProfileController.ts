@@ -26,7 +26,6 @@ export default class ProfileController {
       user_id,
       name,
       email,
-      role,
       old_password,
       password,
     });

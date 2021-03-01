@@ -5,4 +5,5 @@ export default interface ICreateUserDTO {
   email: string;
   password: string;
   role: Role;
+  managerId?: string;
 }

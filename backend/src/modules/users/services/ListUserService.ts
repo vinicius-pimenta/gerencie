@@ -7,8 +7,8 @@ import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 class ListUserService {
   constructor(@inject('UsersRepository') private usersRepository: IUsersRepository) {}
 
-  public async execute(): Promise<User[]> {
-    const users = await this.usersRepository.findAll();
+  public async execute(managerId: string): Promise<User[]> {
+    const users = await this.usersRepository.findAllEmployee(managerId);
 
     return users;
   }

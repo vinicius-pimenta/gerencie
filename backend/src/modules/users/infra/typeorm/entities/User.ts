@@ -4,6 +4,8 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
 import { Exclude } from 'class-transformer';
@@ -11,7 +13,7 @@ import { Exclude } from 'class-transformer';
 // eslint-disable-next-line no-shadow
 export enum Role {
   MANAGER = 'Manager',
-  Employee = 'Employee',
+  EMPLOYEE = 'Employee',
 }
 
 @Entity('users')
@@ -34,6 +36,13 @@ class User {
     enum: Role,
   })
   role: Role;
+
+  @Column()
+  managerId: string;
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'managerId' })
+  manager: User;
 
   @CreateDateColumn()
   created_at: Date;

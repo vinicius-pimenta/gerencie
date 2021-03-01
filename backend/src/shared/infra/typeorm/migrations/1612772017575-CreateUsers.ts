@@ -1,5 +1,5 @@
 import { Role } from '@modules/users/infra/typeorm/entities/User';
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from 'typeorm';
 
 export default class CreateUsers1612772017575 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -33,6 +33,11 @@ export default class CreateUsers1612772017575 implements MigrationInterface {
             enum: Object.values(Role),
           },
           {
+            name: 'managerId',
+            type: 'uuid',
+            isNullable: true,
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
@@ -43,6 +48,18 @@ export default class CreateUsers1612772017575 implements MigrationInterface {
             default: 'now()',
           },
         ],
+      }),
+    );
+
+    await queryRunner.createForeignKey(
+      'users',
+      new TableForeignKey({
+        name: 'managerId',
+        columnNames: ['managerId'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'users',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
       }),
     );
   }

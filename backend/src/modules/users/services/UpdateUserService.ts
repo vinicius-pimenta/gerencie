@@ -2,12 +2,12 @@ import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
 
-import User, { Role } from '@modules/users/infra/typeorm/entities/User';
+import User from '@modules/users/infra/typeorm/entities/User';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import IHashProvider from '@modules/users/providers/HashProvider/models/IHashProvider';
 
 interface IRequest {
-  user_id: string;
+  employeeId: string;
   name: string;
   email: string;
   old_password?: string;
@@ -15,14 +15,20 @@ interface IRequest {
 }
 
 @injectable()
-class UpdateProfileService {
+class UpdateUserService {
   constructor(
     @inject('UsersRepository') private usersRepository: IUsersRepository,
     @inject('HashProvider') private hashProvider: IHashProvider,
   ) {}
 
-  public async execute({ user_id, name, email, old_password, password }: IRequest): Promise<User> {
-    const user = await this.usersRepository.findById(user_id);
+  public async execute({
+    employeeId,
+    name,
+    email,
+    old_password,
+    password,
+  }: IRequest): Promise<User> {
+    const user = await this.usersRepository.findById(employeeId);
 
     if (!user) {
       throw new AppError('User not found.');
@@ -30,7 +36,7 @@ class UpdateProfileService {
 
     const userWithUpdatedEmail = await this.usersRepository.findByEmail(email);
 
-    if (userWithUpdatedEmail && userWithUpdatedEmail.id !== user_id) {
+    if (userWithUpdatedEmail && userWithUpdatedEmail.id !== employeeId) {
       throw new AppError('E-mail already in use.');
     }
 
@@ -55,4 +61,4 @@ class UpdateProfileService {
   }
 }
 
-export default UpdateProfileService;
+export default UpdateUserService;

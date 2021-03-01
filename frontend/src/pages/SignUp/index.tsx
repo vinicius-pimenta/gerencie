@@ -21,7 +21,6 @@ interface SignUpFormData {
   name: string;
   email: string;
   password: string;
-  role?: string;
 }
 
 const SignUp: React.FC = () => {
@@ -36,7 +35,6 @@ const SignUp: React.FC = () => {
           name: data.name,
           email: data.email,
           password: data.password,
-          role: 'Employee',
         };
 
         formRef.current?.setErrors({});
@@ -53,7 +51,7 @@ const SignUp: React.FC = () => {
           abortEarly: false,
         });
 
-        await api.post('/users', data);
+        await api.post('/users/signUp', data);
 
         history.push('/');
 

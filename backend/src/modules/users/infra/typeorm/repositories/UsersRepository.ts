@@ -1,4 +1,4 @@
-import { getRepository, Not, Repository } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
 
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 
@@ -13,8 +13,12 @@ class UsersRepository implements IUsersRepository {
     this.ormRepository = getRepository(User);
   }
 
-  public async findAll(): Promise<User[]> {
-    return this.ormRepository.find();
+  public async deleteEmployee(employeeId: string): Promise<void> {
+    this.ormRepository.delete(employeeId);
+  }
+
+  public async findAllEmployee(managerId: string): Promise<User[]> {
+    return this.ormRepository.find({ where: { managerId } });
   }
 
   public async findById(id: string): Promise<User | undefined> {

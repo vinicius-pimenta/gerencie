@@ -5,26 +5,57 @@ import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAut
 
 import { celebrate, Joi, Segments } from 'celebrate';
 import UsersController from '../controllers/UsersController';
-import { Role } from '../../typeorm/entities/User';
 
 const usersRouter = Router();
 const usersController = new UsersController();
 
 usersRouter.post(
-  '/',
+  '/signUp',
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
       email: Joi.string().email().required(),
       password: Joi.string().required(),
-      role: Joi.string()
-        .required()
-        .valid(...Object.values(Role)),
+    },
+  }),
+  usersController.signUp,
+);
+
+usersRouter.post(
+  '/',
+  ensureAuthenticated,
+  ensureAuthorization,
+  celebrate({
+    [Segments.BODY]: {
+      name: Joi.string().required(),
+      email: Joi.string().email().required(),
+      password: Joi.string().required(),
     },
   }),
   usersController.create,
 );
 
+usersRouter.put(
+  '/:employeeId',
+  celebrate({
+    [Segments.BODY]: {
+      name: Joi.string().required(),
+      email: Joi.string().email().required(),
+      old_password: Joi.string(),
+      password: Joi.string(),
+      password_confirmation: Joi.string().valid(Joi.ref('password')),
+    },
+  }),
+  usersController.update,
+);
+
 usersRouter.get('/', ensureAuthenticated, ensureAuthorization, usersController.index);
+
+usersRouter.delete(
+  '/:employeeId',
+  ensureAuthenticated,
+  ensureAuthorization,
+  usersController.delete,
+);
 
 export default usersRouter;
