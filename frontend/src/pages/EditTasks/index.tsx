@@ -90,7 +90,7 @@ const Tasks: React.FC = () => {
       if (taskEdit) {
         const response = await api.put(`/tasks/${taskEdit.id}`, data);
         if (response && response.status === 200) {
-          history.push('/dashboard');
+          history.push('/tasks');
         }
       }
     },

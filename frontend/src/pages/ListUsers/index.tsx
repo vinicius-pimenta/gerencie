@@ -19,6 +19,7 @@ import {
 import { Delete, Edit } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { FiArrowLeft } from 'react-icons/fi';
 
 import ConfirmationDialog from '../../components/Screen';
 import api from '../../services/api';
@@ -28,6 +29,7 @@ interface User {
   id: string;
   name: string;
   email: string;
+  managerId: string;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -40,8 +42,17 @@ const useStyles = makeStyles((theme: Theme) =>
     table: {
       marginTop: theme.spacing(3),
     },
+
+    containerFiArrowLeft: {
+      marginBottom: '20px !important',
+    },
     link: {
       textDecoration: 'none',
+      color: 'white',
+    },
+    fiArrowLeft: {
+      marginTop: '5px !important',
+      marginRight: '15px !important',
     },
   }),
 );
@@ -84,6 +95,7 @@ const Tasks: React.FC = () => {
     });
 
     if (value === 'ok') {
+      console.log('deletei');
       await api.delete<User[]>(`/users/${itemId}`).then();
       setMessageInfo({ show: true, message: 'Item excluído com sucesso' });
       window.location.reload();
@@ -115,6 +127,12 @@ const Tasks: React.FC = () => {
   return (
     <div>
       <MyHeader />
+      <Container className={classes.containerFiArrowLeft} maxWidth="lg">
+        <Link className={classes.link} to="/dashboard">
+          <FiArrowLeft className={classes.fiArrowLeft} />
+          Back to dashboard
+        </Link>
+      </Container>
       <Container maxWidth="lg">
         <div className={classes.toolbar}>
           <div>
@@ -143,8 +161,8 @@ const Tasks: React.FC = () => {
           <Table aria-label="Clientes">
             <TableHead>
               <TableRow>
-                <TableCell>Nome</TableCell>
-                <TableCell>E-mail</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Email</TableCell>
                 <TableCell width="140" align="center">
                   Ações
                 </TableCell>
@@ -153,7 +171,7 @@ const Tasks: React.FC = () => {
             <TableBody>
               {rows.map(row => (
                 <TableRow key={row.id}>
-                  <TableCell component="th" scope="row">
+                  <TableCell className="" component="th" scope="row">
                     {row.name}
                   </TableCell>
                   <TableCell>{row.email}</TableCell>
@@ -164,7 +182,7 @@ const Tasks: React.FC = () => {
                     >
                       <Delete />
                     </IconButton>
-                    <Link to={`/edit-task/?employeeId=${row.id}`}>
+                    <Link to={`/edit-employee/?employeeId=${row.id}`}>
                       <IconButton aria-label="edit">
                         <Edit />
                       </IconButton>

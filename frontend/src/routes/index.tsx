@@ -9,7 +9,10 @@ import CreateTask from '../pages/CreateTasks';
 
 import Dashboard from '../pages/Dashboard';
 import Tasks from '../pages/tasks';
-import Edit from '../pages/EditTasks';
+import EditTask from '../pages/EditTasks';
+import ListUsers from '../pages/ListUsers';
+import EditEmployee from '../pages/EditEmployee';
+import CreateEmployee from '../pages/CreateEmployee';
 
 const Routes: React.FC = () => (
   <Switch>
@@ -22,8 +25,21 @@ const Routes: React.FC = () => (
       isPrivate
       isAuthorization
     />
-    <Route path="/edit-task" component={Edit} isPrivate isAuthorization />
+    <Route
+      path="/create-employee"
+      component={CreateEmployee}
+      isPrivate
+      isAuthorization
+    />
+    <Route path="/edit-task" component={EditTask} isPrivate isAuthorization />
     <Route path="/tasks" component={Tasks} isPrivate isAuthorization />
+    <Route path="/employees" component={ListUsers} isPrivate isAuthorization />
+    <Route
+      path="/edit-employee"
+      component={EditEmployee}
+      isPrivate
+      isAuthorization
+    />
   </Switch>
 );
 
