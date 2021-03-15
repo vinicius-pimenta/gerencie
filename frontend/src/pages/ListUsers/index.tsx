@@ -141,7 +141,7 @@ const Tasks: React.FC = () => {
             </Typography>
           </div>
           <div>
-            <Link className={classes.link} to="/create-task">
+            <Link className={classes.link} to="/create-employee">
               <Button
                 style={{
                   ...styles.button,
