@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img alt="gerencie-web" title="#gerencie-web" src=".github/assets/gerencie.png" width="1200px" />
+    <img alt="gerencie-web" title="#gerencie-web" src=".github/assets/gerencie-2.png" width="1200px" />
 </h1>
 
 ## GERENCIE
