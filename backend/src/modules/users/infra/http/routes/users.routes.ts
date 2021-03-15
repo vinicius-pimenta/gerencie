@@ -50,6 +50,7 @@ usersRouter.put(
 );
 
 usersRouter.get('/', ensureAuthenticated, ensureAuthorization, usersController.index);
+usersRouter.get('/:employeeId', ensureAuthenticated, ensureAuthorization, usersController.show);
 
 usersRouter.delete(
   '/:employeeId',

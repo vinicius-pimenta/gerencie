@@ -7,6 +7,7 @@ import SignUpUserService from '@modules/users/services/SignUpUserService';
 import ListUserService from '@modules/users/services/ListUserService';
 import DeleteUserService from '@modules/users/services/DeleteUserService';
 import UpdateUserService from '@modules/users/services/UpdateUserService';
+import ShowUserService from '@modules/users/services/ShowUserService';
 import { Role } from '../../typeorm/entities/User';
 
 export default class UsersController {
@@ -52,6 +53,16 @@ export default class UsersController {
     const users = await listUser.execute(managerId);
 
     return response.json(classToClass(users));
+  }
+
+  public async show(request: Request, response: Response): Promise<Response> {
+    const user_id = request.params.employeeId;
+
+    const showUser = container.resolve(ShowUserService);
+
+    const user = await showUser.execute({ user_id });
+
+    return response.json(classToClass(user));
   }
 
   async update(request: Request, response: Response): Promise<Response> {

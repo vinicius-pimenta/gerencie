@@ -9,6 +9,7 @@ const accessControl = new AccessControl(grantsObject);
 const urls = [
   { url: '/sessions', resource: 'Sessions' },
   { url: '/users', resource: 'Users' },
+  { url: '/tasks', resource: 'Tasks' },
 ];
 
 export default function ensureAuthorization(
