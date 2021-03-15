@@ -89,7 +89,7 @@ const SignIn: React.FC = () => {
           </Form>
 
           <Link to="/signup">
-            <FiLogIn color="rgb(130, 87, 230)" />
+            <FiLogIn />
             Criar conta
           </Link>
         </AnimationContainer>

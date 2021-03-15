@@ -33,14 +33,14 @@ export const Container = styled.div<ContainerProps>`
   ${props =>
     props.isFocused &&
     css`
-      color: rgb(130, 87, 230);
-      border-color: rgb(130, 87, 230);
+      color: #894512;
+      border-color: #894512;
     `}
 
   ${props =>
     props.isFilled &&
     css`
-      color: rgb(130, 87, 230);
+      color: #894512;
     `}
 
 

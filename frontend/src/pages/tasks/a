@@ -1,0 +1,160 @@
+const Tasks: React.FC = () => {
+  return (
+    <div>
+      <Form ref={formRef} onSubmit={handleSubmit}>
+        <TextField
+          id="outlined-full-width"
+          required
+          label="Title"
+          style={{ margin: 4 }}
+          placeholder="Type the title"
+          fullWidth
+          margin="normal"
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        <TextField
+          className={classes.textFieldDescription}
+          id="outlined-full-width"
+          multiline
+          label="Description"
+          style={{ margin: 4 }}
+          placeholder="Type the title"
+          fullWidth
+          margin="normal"
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        <TextField
+          className={classes.textField}
+          required
+          id="outlined-select-employee"
+          select
+          label="Select"
+          value={employee}
+          onChange={handleChange}
+          helperText="Please select your employee"
+        >
+          {employeeList.map(option => (
+            <MenuItem key={option.id} value={option.id}>
+              {option.name}
+            </MenuItem>
+          ))}
+        </TextField>
+        <Grid className={classes.gridSaveTask} item>
+          <Button
+            type="submit"
+            variant="contained"
+            onClick={() => handleOpen()}
+          >
+            SAVE TASK
+          </Button>
+        </Grid>
+      </Form>
+      {taskList.map((item, index) => (
+        <div key={item.id}>
+          <Paper className={classes.paper}>
+            <Grid container wrap="nowrap" spacing={4}>
+              <Grid className={classes.grid} item>
+                <Checkbox className={classes.checkBox} color="primary" />
+                <Avatar>W</Avatar>
+              </Grid>
+              <Grid
+                className={classes.gridTitleTypography}
+                item
+                xs={7}
+                zeroMinWidth
+              >
+                <Typography noWrap>{item.title}</Typography>
+              </Grid>
+              <Grid
+                className={classes.gridDateTypography}
+                item
+                xs={2}
+                zeroMinWidth
+              >
+                <Typography noWrap>{item.description}</Typography>
+              </Grid>
+              <Grid className={classes.grid} item xs={1} zeroMinWidth>
+                <Button className={classes.button} size="small">
+                  <SearchIcon className={classes.icon} />
+                </Button>
+                <Button className={classes.button} size="small">
+                  <DeleteIcon
+                    className={classes.icon}
+                    onClick={() => handleDelete(item.id)}
+                  />
+                </Button>
+              </Grid>
+            </Grid>
+          </Paper>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default Tasks;
+
+const style = {
+  position: 'absolute' as const,
+  top: '36%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 800,
+  height: 500,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
+// const handleDelete = (id: Task['id']) => {
+//   setTaskList(prev => prev.filter(item => item.id !== id));
+// };
+
+// const handleAddTask = () => {
+//   // eslint-disable-next-line no-plusplus
+//   const newItem = {
+//     id: 'dasdsa',
+//     title: 'Fazer tela de cadastro de tarefas',
+//     description: ' ',
+//   };
+
+//   setTaskList(prev => [...prev.slice(0, 0 + 1), newItem, ...prev.slice(0 + 1)]);
+// };
+
+// const handleChange = (value: string, id: Task['id']) => {
+//   setList(prev =>
+//     prev.map(item => (item.id === id ? { ...item, value } : item)),
+//   );
+// };
+
+// interface Task {
+//   id: string;
+//   title: string;
+//   description: string;
+// }
+
+// const [taskList, setTaskList] = useState<Task[]>([]);
+
+// api.get<Task[]>('/tasks').then(response => {
+//   setTaskList(response.data);
+// });
+
+// const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+//   setEmployee(event.target.value);
+// };
+
+// const handleSubmit = useCallback(async (data: TaskFormData) => {
+//   console.log('entrei');
+//   data = {
+//     title: 'Lavar o carro',
+//     description: 'Usar pretinho',
+//     userId: '555abd75-6540-47b4-af3d-b44f8f038c13',
+//   };
+
+//   await api.post('/tasks', data);
+// }, []);

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { createContext, useCallback, useContext, useState } from 'react';
 import { uuid } from 'uuidv4';
 

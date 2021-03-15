@@ -1,0 +1,203 @@
+/* eslint-disable import/extensions */
+import {
+  Container,
+  Button,
+  createStyles,
+  IconButton,
+  makeStyles,
+  Paper,
+  Snackbar,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Theme,
+  Typography,
+} from '@material-ui/core';
+import { Delete, Edit } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
+import ConfirmationDialog from '../../components/Screen';
+import api from '../../services/api';
+import MyHeader from '../../components/Header';
+
+interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    toolbar: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    table: {
+      marginTop: theme.spacing(3),
+    },
+    link: {
+      textDecoration: 'none',
+    },
+  }),
+);
+
+const Tasks: React.FC = () => {
+  const classes = useStyles();
+  const [rows, setRows] = useState<User[]>([]);
+
+  useEffect(() => {
+    api.get<User[]>('/users').then(response => {
+      setRows(response.data);
+    });
+  }, []);
+
+  const [deleteOptions, setDeleteOptions] = useState<{
+    show: boolean;
+    itemId?: number;
+    itemDescription?: string;
+  }>({ show: false });
+
+  const [messageInfo, setMessageInfo] = useState<{
+    show: boolean;
+    message: string;
+  }>({ show: false, message: '' });
+
+  const handleDelete = (item: any) => {
+    setDeleteOptions({
+      show: true,
+      itemId: item.id,
+      itemDescription: item.name,
+    });
+  };
+
+  const handleDeleteCallBack = async (value?: string) => {
+    const { itemId } = deleteOptions;
+    setDeleteOptions({
+      show: false,
+      itemId: undefined,
+      itemDescription: undefined,
+    });
+
+    if (value === 'ok') {
+      await api.delete<User[]>(`/users/${itemId}`).then();
+      setMessageInfo({ show: true, message: 'Item excluído com sucesso' });
+      window.location.reload();
+    }
+  };
+
+  const handleCloseMessage = (
+    event: React.SyntheticEvent | React.MouseEvent,
+    reason?: string,
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setMessageInfo({ show: false, message: '' });
+  };
+
+  const styles = {
+    button: {
+      background: '#894512',
+      borderRadius: 3,
+      border: 0,
+      color: '#f4ede8',
+      height: 48,
+      padding: '0 30px',
+    },
+  };
+
+  return (
+    <div>
+      <MyHeader />
+      <Container maxWidth="lg">
+        <div className={classes.toolbar}>
+          <div>
+            <Typography component="h1" variant="h4">
+              Employees
+            </Typography>
+          </div>
+          <div>
+            <Link className={classes.link} to="/create-task">
+              <Button
+                style={{
+                  ...styles.button,
+                }}
+                variant="contained"
+                color="primary"
+              >
+                Create Employee
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </Container>
+
+      <Container maxWidth="lg">
+        <TableContainer component={Paper} className={classes.table}>
+          <Table aria-label="Clientes">
+            <TableHead>
+              <TableRow>
+                <TableCell>Nome</TableCell>
+                <TableCell>E-mail</TableCell>
+                <TableCell width="140" align="center">
+                  Ações
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map(row => (
+                <TableRow key={row.id}>
+                  <TableCell component="th" scope="row">
+                    {row.name}
+                  </TableCell>
+                  <TableCell>{row.email}</TableCell>
+                  <TableCell>
+                    <IconButton
+                      aria-label="delete"
+                      onClick={() => handleDelete(row)}
+                    >
+                      <Delete />
+                    </IconButton>
+                    <Link to={`/edit-task/?employeeId=${row.id}`}>
+                      <IconButton aria-label="edit">
+                        <Edit />
+                      </IconButton>
+                    </Link>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Container>
+
+      <ConfirmationDialog
+        id={`delete-${deleteOptions.itemId}`}
+        title="Excluir"
+        confirmButtonText="Excluir"
+        keepMounted
+        open={deleteOptions.show}
+        onClose={handleDeleteCallBack}
+      >
+        Confirma a exclusão do item{' '}
+        <strong>{deleteOptions.itemDescription}</strong>
+      </ConfirmationDialog>
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        autoHideDuration={3000}
+        open={messageInfo.show}
+        message={messageInfo.message}
+        key={messageInfo.message}
+        onClose={handleCloseMessage}
+      />
+    </div>
+  );
+};
+
+export default Tasks;
