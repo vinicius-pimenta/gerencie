@@ -10,6 +10,8 @@ import imgCreateEmployee from '../../assets/sign-up-background.jpg';
 import imgListOfEmployees from '../../assets/list-of-employees.jpg';
 import imgBusinessManChekcbox from '../../assets/business-man-chekcbox.jpg';
 import imgTask from '../../assets/task.jpg';
+import imgCategory from '../../assets/category.jpg';
+import imgListCategories from '../../assets/list-of-categories.jpg';
 import MyHeader from '../../components/Header';
 
 const useStyles = makeStyles({
@@ -122,6 +124,42 @@ const Dashboard: React.FC = () => {
                   component="div"
                 >
                   Tasks List
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Link>
+      </Container>
+      <Container className={classes.container} maxWidth="md">
+        <Link className={classes.link} to="/create-category">
+          <Card className={classes.card}>
+            <CardActionArea>
+              <CardMedia className={classes.media} image={imgCategory} />
+              <CardContent className={classes.content}>
+                <Typography
+                  className={classes.typography}
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                >
+                  Create Category
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Link>
+        <Link className={classes.link} to="/categories">
+          <Card className={classes.card}>
+            <CardActionArea>
+              <CardMedia className={classes.media} image={imgListCategories} />
+              <CardContent className={classes.content}>
+                <Typography
+                  className={classes.typography}
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                >
+                  Tasks Categories
                 </Typography>
               </CardContent>
             </CardActionArea>

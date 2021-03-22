@@ -11,7 +11,7 @@ const tasksController = new TasksController();
 tasksRouter.post(
   '/',
   ensureAuthenticated,
-  ensureAuthorization,
+  // ensureAuthorization,
   // celebrate({
   //   [Segments.BODY]: {
   //     title: Joi.string().required(),

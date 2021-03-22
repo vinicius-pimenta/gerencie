@@ -9,10 +9,12 @@ import CreateTask from '../pages/CreateTasks';
 
 import Dashboard from '../pages/Dashboard';
 import Tasks from '../pages/tasks';
+import ListCategories from '../pages/ListCategories';
 import EditTask from '../pages/EditTasks';
 import ListUsers from '../pages/ListUsers';
 import EditEmployee from '../pages/EditEmployee';
 import CreateEmployee from '../pages/CreateEmployee';
+import CreateCategory from '../pages/CreateCategory';
 
 const Routes: React.FC = () => (
   <Switch>
@@ -28,6 +30,18 @@ const Routes: React.FC = () => (
     <Route
       path="/create-employee"
       component={CreateEmployee}
+      isPrivate
+      isAuthorization
+    />
+    <Route
+      path="/create-category"
+      component={CreateCategory}
+      isPrivate
+      isAuthorization
+    />
+    <Route
+      path="/categories"
+      component={ListCategories}
       isPrivate
       isAuthorization
     />

@@ -6,7 +6,9 @@ import Task from '../infra/typeorm/entities/Task';
 interface IRequest {
   title: string;
   description?: string;
+  categoryId?: string;
   userId?: string;
+  date: Date;
 }
 
 @injectable()
@@ -16,11 +18,12 @@ class CreateTaskService {
     private tasksRepository: ITasksRepository,
   ) {}
 
-  public async execute({ title, description, userId }: IRequest): Promise<Task> {
-    console.log('Entrei no execute');
+  public async execute({ title, description, categoryId, userId, date }: IRequest): Promise<Task> {
     const user = await this.tasksRepository.create({
+      date,
       title,
       description,
+      categoryId,
       userId,
     });
 

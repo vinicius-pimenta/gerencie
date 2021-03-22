@@ -21,11 +21,18 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
 
+import dateFormat from 'dateformat';
+
 import ConfirmationDialog from '../../components/Screen';
 import api from '../../services/api';
 import MyHeader from '../../components/Header';
 
 interface User {
+  id: string;
+  name: string;
+}
+
+interface Category {
   id: string;
   name: string;
 }
@@ -36,6 +43,9 @@ interface Task {
   description?: string;
   user: User;
   userId: string;
+  category: Category;
+  categoryId: string;
+  date: Date;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -168,7 +178,9 @@ const Tasks: React.FC = () => {
             <TableHead>
               <TableRow>
                 <TableCell>Title</TableCell>
+                <TableCell>Category</TableCell>
                 <TableCell>Employee</TableCell>
+                <TableCell>Delivery Date</TableCell>
                 <TableCell width="140" align="center">
                   Ações
                 </TableCell>
@@ -180,7 +192,11 @@ const Tasks: React.FC = () => {
                   <TableCell className="" component="th" scope="row">
                     {row.title}
                   </TableCell>
+                  <TableCell>
+                    {row.category ? row.category.name : row.categoryId}
+                  </TableCell>
                   <TableCell>{row.user ? row.user.name : row.userId}</TableCell>
+                  <TableCell>{row.date}</TableCell>
                   <TableCell>
                     <IconButton
                       aria-label="delete"

@@ -1,3 +1,4 @@
+import Category from '@modules/categories/infra/typeorm/entities/Category';
 import {
   Column,
   Entity,
@@ -6,6 +7,7 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
+  OneToOne,
 } from 'typeorm';
 import User from '../../../../users/infra/typeorm/entities/User';
 
@@ -19,6 +21,16 @@ class Task {
 
   @Column()
   description: string;
+
+  @Column('timestamp with time zone')
+  date: Date;
+
+  @Column()
+  categoryId: string;
+
+  @OneToOne(() => Category)
+  @JoinColumn({ name: 'categoryId' })
+  category: Category;
 
   @Column()
   userId: string;

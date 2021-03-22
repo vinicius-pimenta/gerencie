@@ -18,8 +18,6 @@ class UpdateTaskService {
 
   public async execute({ taskId, title, description, userId }: IRequest): Promise<User> {
     const task = await this.tasksRepository.findById(taskId);
-    console.log(taskId);
-    console.log(task);
 
     if (!task) {
       throw new AppError('Task not found.');

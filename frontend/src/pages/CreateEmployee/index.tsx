@@ -108,9 +108,9 @@ const Tasks: React.FC = () => {
                 helperText={formik.touched.email && formik.errors.email}
               />
               <TextField
-                className={classes.textFieldDescription}
+                className={classes.textFieldTitle}
                 id="outlined-full-width"
-                multiline
+                type="password"
                 name="password"
                 label="Password"
                 placeholder="Enter the password"

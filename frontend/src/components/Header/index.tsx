@@ -20,7 +20,7 @@ const MyHeader: React.FC = () => {
         <Container className={classes.containerHeader} maxWidth="lg">
           <Profile>
             <div>
-              <span>Bem-vindo,</span>
+              <span id="bemVindo">Bem-vindo,</span>
               {/* <Link to="/profile"> */}
               <strong>{user.name}</strong>
               {/* </Link> */}

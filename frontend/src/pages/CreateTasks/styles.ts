@@ -29,10 +29,24 @@ const UseStyles = makeStyles((theme: Theme) =>
         height: '100px !important',
       },
     },
+    textFieldDate: {
+      marginTop: '20px !important',
+
+      // '& .MuiOutlinedInput-input': {
+      //   height: '100px !important',
+      // },
+    },
+
+    textFieldCategoryId: {
+      width: '300px',
+      marginTop: '20px !important',
+      marginLeft: '20px !important',
+    },
 
     textFieldUserId: {
-      width: '250px',
+      width: '288px',
       marginTop: '20px !important',
+      marginLeft: '20px !important',
     },
 
     // paper: {

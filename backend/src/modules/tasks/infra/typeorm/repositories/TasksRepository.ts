@@ -14,7 +14,7 @@ class TasksRepository implements ITasksRepository {
   }
 
   public async index(): Promise<Task[]> {
-    return this.ormRepository.find({ relations: ['user'] });
+    return this.ormRepository.find({ relations: ['user', 'category'] });
   }
 
   public async findById(id: string): Promise<Task | undefined> {
@@ -36,7 +36,6 @@ class TasksRepository implements ITasksRepository {
   }
 
   public async deleteTask(taskId: string): Promise<void> {
-    console.log('CHEGUEI AQUI');
     this.ormRepository.delete(taskId);
   }
 

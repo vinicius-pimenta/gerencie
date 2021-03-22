@@ -7,16 +7,23 @@ import ListTaskService from '@modules/tasks/services/ListTaskService';
 import ShowTaskService from '@modules/tasks/services/ShowTaskService';
 import UpdateTaskService from '@modules/tasks/services/UpdateTaskService';
 import DeleteTaskService from '@modules/tasks/services/DeleteTaskService';
+import VerifyDate from './VerifyDate';
 
 export default class TasksController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { title, description, userId } = request.body;
+    const { title, description, categoryId, userId, date } = request.body;
+
+    if (VerifyDate(date) === false) {
+      throw Error();
+    }
 
     const createTask = container.resolve(CreateTaskService);
 
     const task = await createTask.execute({
+      date,
       title,
       description,
+      categoryId,
       userId,
     });
 

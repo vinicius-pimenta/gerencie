@@ -19,10 +19,17 @@ import MyHeader from '../../components/Header';
 interface TaskFormData {
   title: string;
   description?: string;
+  categoryId: string;
+  date: Date;
   userId: string;
 }
 
 interface User {
+  id: string;
+  name: string;
+}
+
+interface Category {
   id: string;
   name: string;
 }
@@ -44,16 +51,22 @@ const Tasks: React.FC = () => {
   const history = useHistory();
 
   const [employeeList, setEmployeeList] = useState<User[]>([]);
+  const [categoryList, setCategoryList] = useState<User[]>([]);
 
   useEffect(() => {
     api.get<User[]>('/users').then(response => {
       setEmployeeList(response.data);
+    });
+
+    api.get<Category[]>('/categories').then(response => {
+      setCategoryList(response.data);
     });
   }, []);
 
   const validationSchema = yup.object({
     title: yup.string().required('Title is required'),
     description: yup.string(),
+    categoryId: yup.string().required('Category is required'),
     userId: yup.string().required('Employee is required'),
   });
 
@@ -61,10 +74,13 @@ const Tasks: React.FC = () => {
     initialValues: {
       title: '',
       description: '',
+      date: new Date(),
+      categoryId: '',
       userId: '',
     },
     validationSchema,
     onSubmit: async (data: TaskFormData) => {
+      console.log(data);
       const response = await api.post('/tasks', data);
 
       if (response && response.status === 200) {
@@ -126,6 +142,54 @@ const Tasks: React.FC = () => {
                   formik.touched.description && formik.errors.description
                 }
               />
+              <TextField
+                className={classes.textFieldDate}
+                id="date"
+                label="Delivery Date"
+                type="date"
+                style={{ width: 220 }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                variant="outlined"
+                value={formik.values.date}
+                onChange={formik.handleChange}
+                error={formik.touched.date && Boolean(formik.errors.date)}
+                helperText={formik.touched.date && formik.errors.date}
+              />
+              <TextField
+                className={classes.textFieldCategoryId}
+                id="outlined-select-category"
+                select
+                required
+                name="categoryId"
+                label="Category"
+                placeholder="Select the category"
+                variant="outlined"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                SelectProps={{
+                  native: true,
+                }}
+                value={formik.values.categoryId}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.categoryId && Boolean(formik.errors.categoryId)
+                }
+                helperText={
+                  formik.touched.categoryId && formik.errors.categoryId
+                }
+              >
+                <option hidden disabled value="">
+                  Choose one option
+                </option>
+                {categoryList.map(option => (
+                  <option key={option.id} value={option.id}>
+                    {option.name}
+                  </option>
+                ))}
+              </TextField>
               <TextField
                 className={classes.textFieldUserId}
                 id="outlined-select-employee"
