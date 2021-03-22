@@ -15,10 +15,11 @@ O projeto consiste em um sistema web que tem como objetivo designar tarefas em f
 ## :rocket: Tecnologias Utilizadas
 Esse projeto contém as seguintes tecnologias:
 
-- TypeScript
-- Node.js
-- ReactJS
-- PostgreSQL
+- TypeScript ^4.1.3"
+- Node.js v14.15.4
+- ReactJS ^17.0.1"
+- PostgreSQL 12.5
+- Selenium 3.141.59
 
 ## :bust_in_silhouette: Colaboradores
 - Adilson Henrique de Oliveira Lima
