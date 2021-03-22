@@ -14,6 +14,7 @@ export default class TasksController {
     const { title, description, categoryId, userId, date } = request.body;
 
     if (VerifyDate(date) === false) {
+      console.log('Teste');
       throw Error();
     }
 
